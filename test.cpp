@@ -1,3 +1,4 @@
+#include "movie.cpp"
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -5,20 +6,14 @@
 #include <vector>
 #include <cstring>
 #include <algorithm>
-#include "movie.h"
 
 using namespace std;
 
 bool parseLine(string &line, string &movieName, double &movieRating);
 
 int main(int argc, char** argv) {
-    if(argc < 4) {
-        cerr << "Usage: " << argv[0] << " arg1 arg2 arg3" << endl;
-        exit(1);
-    }
-
     bool flag = false;
-    if(strcmp(argv[1], "true") == 0) {
+    if(strcmp(argv[1], "true") == 0){
         flag = true;
     } else if(strcmp(argv[1], "false") == 0) {
         flag = false;
@@ -26,7 +21,7 @@ int main(int argc, char** argv) {
         cerr << "Argument 1 must be a boolean (true/false)" << endl;
         exit(1);
     }
-  
+
     ifstream movieFile (argv[2]);
     string line, movieName;
     double movieRating;
@@ -36,18 +31,15 @@ int main(int argc, char** argv) {
         exit(1);
     }
 
-    // Create an objects of the BST class you defined 
-    // to contain the name and rating in the input file
-
-    // Read each file and store the name and rating
-    movieBST IMDb;
-    while (getline (movieFile, line) && parseLine(line, movieName, movieRating)){
-        IMDb.insert(movieName, movieRating);
+    movieBST lanfanqie;
+    while (getline (movieFile, line) && parseLine(line, movieName, movieRating)) {
+        lanfanqie.insert(movieName, movieRating);
     }
-    IMDb.printInOrder();
-    movieFile.close();
 
+    lanfanqie.printPreOrder();
+    movieFile.close();
     return 0;
+
 }
 
 bool parseLine(string &line, string &movieName, double &movieRating) {
@@ -57,7 +49,7 @@ bool parseLine(string &line, string &movieName, double &movieRating) {
     bool flag = false;
     movieName = tempRating = "", movieRating = 0.0, flag = false;
 
-    for (int i = 0; i < line.length(); i++) {
+    for (int i = 0; i < line.length(); i++){
         if(flag) tempRating += line[i];
         else if(line[i]==','&& line[0]!='"') flag = true;
         else {
@@ -70,4 +62,3 @@ bool parseLine(string &line, string &movieName, double &movieRating) {
     movieRating = stod(tempRating);
     return true;
 }
-
