@@ -47,7 +47,7 @@ int main(int argc, char** argv) {
 
     if (flag) {
         string prefix(argv[3]);
-        IMDb.printInOrder();
+        IMDb.printPreOrder();
         cout << endl;
         IMDb.printHighest(prefix);
     }
