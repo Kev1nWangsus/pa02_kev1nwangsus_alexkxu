@@ -5,7 +5,7 @@
 #include <vector>
 #include <cstring>
 #include <algorithm>
-#include "movie.h"
+#include "movies.h"
 
 using namespace std;
 
@@ -26,7 +26,7 @@ int main(int argc, char** argv) {
         cerr << "Argument 1 must be a boolean (true/false)" << endl;
         exit(1);
     }
-  
+    
     ifstream movieFile (argv[2]);
     string line, movieName;
     double movieRating;
@@ -40,11 +40,18 @@ int main(int argc, char** argv) {
     // to contain the name and rating in the input file
 
     // Read each file and store the name and rating
-    movieBST IMDb;
+    MovieBST IMDb;
     while (getline (movieFile, line) && parseLine(line, movieName, movieRating)){
         IMDb.insert(movieName, movieRating);
     }
-    IMDb.printInOrder();
+
+    if (flag) {
+        string prefix(argv[3]);
+        IMDb.printInOrder();
+        cout << endl;
+        IMDb.searchHighest(prefix);
+    }
+
     movieFile.close();
 
     return 0;
