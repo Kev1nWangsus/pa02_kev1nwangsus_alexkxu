@@ -10,7 +10,7 @@
 using namespace std;
 
 bool parseLine(string &line, string &movieName, double &movieRating);
-void timer(int trials, vector<string> list);
+void timer(int trials, vector<string> list, string targetfilename);
 
 int main(int argc, char** argv) {
     if(argc < 4) {
@@ -29,6 +29,7 @@ int main(int argc, char** argv) {
     }
     
     ifstream movieFile (argv[2]);
+    string filename(argv[2]);
     string line, movieName;
     double movieRating;
 
@@ -54,8 +55,9 @@ int main(int argc, char** argv) {
         cout << endl;
         IMDb.printHighest(prefix);
     } else {
+        string targetfilename = "result_" + filename;
         int trials = atoi(argv[3]);
-        timer(trials, list); 
+        timer(trials, list, targetfilename); 
     }
 
     movieFile.close();
@@ -83,11 +85,11 @@ bool parseLine(string &line, string &movieName, double &movieRating) {
     return true;
 }
 
-void timer(int trials, vector<string> list) {
+void timer(int trials, vector<string> list, string targetfilename) {
     MovieBST test;
     clock_t start, end;
     double time, mintime = -1, maxtime = 0, avgtime = 0;
-    ofstream data("time_data.csv");
+    ofstream data(targetfilename);
     data << "N. N_visited" << endl;
 
     for (int i = 0; i < list.size(); i++) {
