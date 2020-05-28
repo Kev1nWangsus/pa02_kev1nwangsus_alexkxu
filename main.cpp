@@ -10,7 +10,7 @@
 using namespace std;
 
 bool parseLine(string &line, string &movieName, double &movieRating);
-void timer(int trials, vector<string> list, MovieBST mbst);
+void timer(int trials, vector<string> list);
 
 int main(int argc, char** argv) {
     if(argc < 4) {
@@ -55,7 +55,7 @@ int main(int argc, char** argv) {
         IMDb.printHighest(prefix);
     } else {
         int trials = atoi(argv[3]);
-        timer(trials, list, IMDb); 
+        timer(trials, list); 
     }
 
     movieFile.close();
@@ -83,16 +83,23 @@ bool parseLine(string &line, string &movieName, double &movieRating) {
     return true;
 }
 
-void timer(int trials, vector<string> list, MovieBST mbst) {
+void timer(int trials, vector<string> list) {
+    MovieBST test;
     clock_t start, end;
     double time, mintime = -1, maxtime = 0, avgtime = 0;
+    ofstream data("time_data.csv");
+    data << "N. N_visited" << endl;
 
-    string line, movieName;
-    double movieRating;
+    for (int i = 0; i < list.size(); i++) {
+        data << i << ", ";
+        test.insert(list[i]);
+        data << test.countDepth(list[i]) << endl;
+    }
+    data.close();
 
     for (int i = 0; i < trials; i++) {
         start = clock();
-        for (int j = 0; j < list.size(); j++) mbst.contains(list[j]);
+        for (int j = 0; j < list.size(); j++) test.contains(list[j]);
         end = clock();
         time = (end - start) / (double)CLOCKS_PER_SEC;
 

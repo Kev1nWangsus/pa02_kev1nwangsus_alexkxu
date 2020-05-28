@@ -20,4 +20,3 @@ tests.o: tests.cpp
 
 clean:
 	rm -f tests runMovies *.o
-

@@ -107,15 +107,19 @@ void MovieBST::printPostOrder(Movie *m) const {
     }
 }
 
-int MovieBST::count() const {
-    return count(root);
+int MovieBST::countDepth(string name) {
+    return countDepth(name, root);
 }
 
-int MovieBST::count(Movie *m) const {
-    if (m) {
-        return 1 + count(m->left) + count(m->right); 
+int MovieBST::countDepth(string name, Movie *m) {
+    if (!m) return 0;
+    if (m->title == name) {
+        return m->depth;
+    } else if (name > m->title) {
+        return countDepth(name, m->right);
+    } else {
+        return countDepth(name, m->left);
     }
-    return 0;
 }
 
 Movie* MovieBST::getFirstMovie(string prefix, Movie *m) {

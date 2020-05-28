@@ -13,7 +13,7 @@ using namespace std;
 
 class Movie {
     public:
-        Movie(string n="", double r=0, int d=0);
+        Movie(string n="", double r=0.0, int d=0);
         bool startWith(string s);
 
     private:
@@ -32,15 +32,14 @@ class MovieBST
         ~MovieBST(); // destructor
 
         // public functions
-        bool insert(string name, double rating);
+        bool insert(string name, double rating=0.0);
         void printPreOrder() const;
         void printInOrder() const;
         void printPostOrder() const;
 
         void printHighest(string prefix); // this will use search highest
-        int count() const;
+        int countDepth(string name);
         void test(string prefix);
-
         bool contains(string mtitle) const;
  
     private:
@@ -58,7 +57,7 @@ class MovieBST
                                                     // has the smallest depth 
         Movie* searchHighest(string prefix, Movie *m); // search for highest rating movie
                                                        // that starts with target prefix
-        int count(Movie *m) const;
+        int countDepth(string name, Movie *m);
         bool containsHelper(Movie* m, string mtitle) const;
 };
 
