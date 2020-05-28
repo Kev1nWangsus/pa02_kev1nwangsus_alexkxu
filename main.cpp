@@ -49,7 +49,7 @@ int main(int argc, char** argv) {
         string prefix(argv[3]);
         IMDb.printInOrder();
         cout << endl;
-        IMDb.searchHighest(prefix);
+        IMDb.printHighest(prefix);
     }
 
     movieFile.close();
