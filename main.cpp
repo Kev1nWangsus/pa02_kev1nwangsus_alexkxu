@@ -10,6 +10,7 @@
 using namespace std;
 
 bool parseLine(string &line, string &movieName, double &movieRating);
+void timer(int trials, vector<string> list, MovieBST mbst);
 
 int main(int argc, char** argv) {
     if(argc < 4) {
@@ -41,8 +42,10 @@ int main(int argc, char** argv) {
 
     // Read each file and store the name and rating
     MovieBST IMDb;
+    vector<string> list;
     while (getline (movieFile, line) && parseLine(line, movieName, movieRating)){
         IMDb.insert(movieName, movieRating);
+        list.push_back(movieName);
     }
 
     if (flag) {
@@ -50,10 +53,12 @@ int main(int argc, char** argv) {
         IMDb.printPreOrder();
         cout << endl;
         IMDb.printHighest(prefix);
+    } else {
+        int trials = atoi(argv[3]);
+        timer(trials, list, IMDb); 
     }
 
     movieFile.close();
-
     return 0;
 }
 
@@ -68,9 +73,9 @@ bool parseLine(string &line, string &movieName, double &movieRating) {
         if(flag) tempRating += line[i];
         else if(line[i]==','&& line[0]!='"') flag = true;
         else {
-        if(i==0 && line[0]=='"') continue;
-        if(line[i]=='"'){ i++; flag=true; continue;}
-        movieName += line[i];
+            if(i==0 && line[0]=='"') continue;
+            if(line[i]=='"'){ i++; flag=true; continue;}
+            movieName += line[i];
         }
     }
     
@@ -78,3 +83,28 @@ bool parseLine(string &line, string &movieName, double &movieRating) {
     return true;
 }
 
+void timer(int trials, vector<string> list, MovieBST mbst) {
+    clock_t start, end;
+    double time, mintime = -1, maxtime = 0, avgtime = 0;
+
+    string line, movieName;
+    double movieRating;
+
+    for (int i = 0; i < trials; i++) {
+        start = clock();
+        for (int j = 0; j < list.size(); j++) mbst.contains(list[j]);
+        end = clock();
+        time = (end - start) / (double)CLOCKS_PER_SEC;
+
+        cout << "trial " << i+1 << ": " << time*1000 << "ms" << endl;
+        if (mintime == -1 || time < mintime) mintime = time;
+        if (time > maxtime) maxtime = time;
+        avgtime += time;
+    }
+    avgtime /= trials;
+
+    cout << "Time elapsed to search all nodes over " << trials << " trials: " << endl;
+    cout << "   minimum time: " << mintime*1000 << "ms" << endl;
+    cout << "   maximum time: " << maxtime*1000 << "ms" << endl;
+    cout << "   average time: " << avgtime*1000 << "ms" << endl;
+}

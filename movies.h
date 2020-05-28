@@ -39,9 +39,10 @@ class MovieBST
 
         void printHighest(string prefix); // this will use search highest
         int count() const;
-        bool contains(string name) const;
         void test(string prefix);
 
+        bool contains(string mtitle) const;
+ 
     private:
         Movie *root; // the movie node with depth 0
 
@@ -58,6 +59,7 @@ class MovieBST
         Movie* searchHighest(string prefix, Movie *m); // search for highest rating movie
                                                        // that starts with target prefix
         int count(Movie *m) const;
+        bool containsHelper(Movie* m, string mtitle) const;
 };
 
 #endif
