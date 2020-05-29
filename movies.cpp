@@ -21,6 +21,16 @@ MovieBST::~MovieBST() {
     clear(root);
 }
 
+void MovieBST::clear(Movie *m) {
+    if (!m) return;
+    else if (m) {
+        clear(m->left);
+        clear(m->right);
+        delete m;
+        return;
+    }
+}
+
 bool MovieBST::contains(string mtitle) const {
     if (!root) return false;
     return containsHelper(root, mtitle);
@@ -31,13 +41,6 @@ bool MovieBST::containsHelper(Movie* m, string mtitle) const {
     if (m->title == mtitle) return true;
     if (containsHelper(m->left, mtitle)) return true;
     return containsHelper(m->right, mtitle);
-}
-
-void MovieBST::clear(Movie *m) {
-    if (m) {
-        clear(m->left);
-        clear(m->right);
-    }
 }
 
 bool MovieBST::insert(string name, double rating) {
