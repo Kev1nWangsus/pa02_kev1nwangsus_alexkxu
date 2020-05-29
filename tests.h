@@ -17,7 +17,7 @@ void test_movie_startWith();
 
 // test MovieBST class
 void test_moviebst();
-void test_moviebst_contains();
+void test_moviebst_search();
 void test_moviebst_insert();
 void test_moviebst_countDepth();
 

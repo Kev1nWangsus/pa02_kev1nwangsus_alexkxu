@@ -1,7 +1,7 @@
 # Makefile
 CXX_FLAG = --std=c++11 -g
 
-all: runMovies
+all: runMovies tests
 
 runMovies: main.o movies.o
 	g++ $(CXX_FLAG) -o runMovies main.o movies.o
