@@ -115,7 +115,7 @@ int MovieBST::countDepth(string name) {
 }
 
 int MovieBST::countDepth(string name, Movie *m) {
-    if (!m) return 0;
+    if (!m) return -1;
     if (m->title == name) {
         return m->depth;
     } else if (name > m->title) {
