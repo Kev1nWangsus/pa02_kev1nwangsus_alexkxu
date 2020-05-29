@@ -28,11 +28,11 @@ void test_movie() {
 
 void test_moviebst() {
     START_TEST("test_moviebst");
-    void test_moviebst_constructor();
-    void test_moviebst_destructor();
-    void test_moviebst_contains();
-    void test_moviebst_insert();
-    void test_moviebst_countDepth();
+    test_moviebst_constructor();
+    test_moviebst_destructor();
+    test_moviebst_contains();
+    test_moviebst_insert();
+    test_moviebst_countDepth();
     END_TEST("test_moviebst");
 }
 
