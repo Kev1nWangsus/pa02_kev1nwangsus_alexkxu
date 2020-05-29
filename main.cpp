@@ -93,7 +93,7 @@ void timer(int trials, vector<string> list, string targetfilename) {
     data << "N. N_visited" << endl;
 
     for (int i = 0; i < list.size(); i++) {
-        data << i << ", ";
+        data << i+1 << ", ";
         test.insert(list[i]);
         data << test.countDepth(list[i]) << endl;
     }
@@ -101,7 +101,7 @@ void timer(int trials, vector<string> list, string targetfilename) {
 
     for (int i = 0; i < trials; i++) {
         start = clock();
-        for (int j = 0; j < list.size(); j++) test.contains(list[j]);
+        for (int j = 0; j < list.size(); j++) test.search(list[j]);
         end = clock();
         time = (end - start) / (double)CLOCKS_PER_SEC;
 
@@ -116,4 +116,5 @@ void timer(int trials, vector<string> list, string targetfilename) {
     cout << "   minimum time: " << mintime*1000 << "ms" << endl;
     cout << "   maximum time: " << maxtime*1000 << "ms" << endl;
     cout << "   average time: " << avgtime*1000 << "ms" << endl;
+    return;
 }

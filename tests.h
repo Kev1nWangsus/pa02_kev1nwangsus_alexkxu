@@ -1,3 +1,10 @@
+// tests.h
+// Authors: Shuo Wang and Alex Xu
+// tests functions declaration
+
+#ifndef TESTS_H
+#define TESTS_H
+
 #include <iostream>
 
 using namespace std;
@@ -10,8 +17,6 @@ void test_movie_startWith();
 
 // test MovieBST class
 void test_moviebst();
-void test_moviebst_constructor();
-void test_moviebst_destructor();
 void test_moviebst_contains();
 void test_moviebst_insert();
 void test_moviebst_countDepth();
@@ -41,3 +46,5 @@ void assertEquals(int expected, int actual, string testDescription) {
         <<"  Expected: "<< expected << " Actual: " << actual << endl;
     }
 }
+
+#endif

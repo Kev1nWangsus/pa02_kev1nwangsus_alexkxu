@@ -6,7 +6,6 @@
 #define MOVIES_H
 
 #include <iostream>
-#include "utility.h"
 #include <string>
 
 using namespace std;
@@ -39,8 +38,7 @@ class MovieBST
 
         void printHighest(string prefix); // this will use search highest
         int countDepth(string name);
-        void test(string prefix);
-        bool contains(string mtitle) const;
+        bool search(string mtitle);
  
     private:
         Movie *root; // the movie node with depth 0
@@ -58,7 +56,7 @@ class MovieBST
         Movie* searchHighest(string prefix, Movie *m); // search for highest rating movie
                                                        // that starts with target prefix
         int countDepth(string name, Movie *m);
-        bool containsHelper(Movie* m, string mtitle) const;
+        bool search(string name, Movie* m);
 };
 
 #endif

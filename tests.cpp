@@ -1,8 +1,8 @@
 // tests.cpp
 // Authors: Shuo Wang and Alex Xu
+// tests functions definition
 
 #include "movies.h"
-#include "utility.h"
 #include "tests.h"
 #include <iostream>
 #include <cassert>
@@ -28,8 +28,6 @@ void test_movie() {
 
 void test_moviebst() {
     START_TEST("test_moviebst");
-    test_moviebst_constructor();
-    test_moviebst_destructor();
     test_moviebst_contains();
     test_moviebst_insert();
     test_moviebst_countDepth();
@@ -49,22 +47,6 @@ void test_movie_startWith() {
     string test3 = "startWith(): compare with unequal string";
     string s3 = "site";
     assertEquals(m1.startWith(s3), false, test3);
-}
-
-void test_moviebst_constructor() {
-    // this one is fine if it doesn't crash
-    string test1 = "MovieBST(): empty MovieBST";
-    MovieBST mbst1;
-    assertEquals(mbst1.contains(""), false, test1);
-}
-
-void test_moviebst_destructor() {
-    // no surface-level problems as long as it doesn't crash
-    // test for leaks in valgrind
-    string test1 = "~MovieBST(): removing empty MovieBST";
-    MovieBST mbst1;
-    mbst1.~MovieBST();
-    assertEquals(true, true, test1);
 }
 
 void test_moviebst_contains() {

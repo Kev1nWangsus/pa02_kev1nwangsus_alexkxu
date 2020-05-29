@@ -31,18 +31,6 @@ void MovieBST::clear(Movie *m) {
     }
 }
 
-bool MovieBST::contains(string mtitle) const {
-    if (!root) return false;
-    return containsHelper(root, mtitle);
-}
-
-bool MovieBST::containsHelper(Movie* m, string mtitle) const {
-    if (!m) return false;
-    if (m->title == mtitle) return true;
-    if (containsHelper(m->left, mtitle)) return true;
-    return containsHelper(m->right, mtitle);
-}
-
 bool MovieBST::insert(string name, double rating) {
     if (!root) {
         root = new Movie(name, rating, 0);
@@ -125,6 +113,21 @@ int MovieBST::countDepth(string name, Movie *m) {
     }
 }
 
+bool MovieBST::search(string name) {
+    return search(name, root);
+}
+
+bool MovieBST::search(string name, Movie* m) {
+    if (!m) return false;
+    if (m->title == name) {
+        return true;
+    } else if (name > m->title) {
+        return search(name, m->right);
+    } else {
+        return search(name, m->left);
+    }
+}
+
 Movie* MovieBST::getFirstMovie(string prefix, Movie *m) {
     if (!m) return nullptr;
     if (prefix > m->title) {
@@ -145,9 +148,8 @@ void MovieBST::printHighest(string prefix) {
 }
 
 Movie* MovieBST::searchHighest(string prefix, Movie *m) {
-    if (!m) {
-        return nullptr;
-    }
+    if (!m) return nullptr;
+
     Movie *l = searchHighest(prefix, m->left);
     Movie *r = searchHighest(prefix, m->right);
     bool flag = m->startWith(prefix);
